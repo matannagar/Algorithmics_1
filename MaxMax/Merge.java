@@ -24,7 +24,7 @@ public class Merge {
         System.out.println("mergeRecurs2 comp = "+ comp);
         return res;
     }
-    public static int mergeRecurs2(int[] a1, int[]a2, int i, int j, int k, int comp, int res[]){
+    public static int mergeRecurs2(int[] a1, int[]a2, int i, int j, int k, int comp, int[] res){
         if (i<a1.length || j<a2.length){
             comp++;
             if (i<a1.length && j<a2.length){
@@ -54,13 +54,13 @@ public class Merge {
     }
     public static void main(String[] args) {
         int size = 1000;
-        int a1[] = MyLibrary.randomIntegerArray(size);
-        int a2[] = MyLibrary.randomIntegerArray(size);
+        int[] a1 = MyLibrary.randomIntegerArray(size);
+        int[] a2 = MyLibrary.randomIntegerArray(size);
         Arrays.sort(a1);
         Arrays.sort(a2);
-        int res1[] = merge(a1, a2);
+        int[] res1 = merge(a1, a2);
         System.out.println("is sorted res1? "+isSorted(res1));
-        int res2[] = mergeRecurs2(a1, a2);
+        int[] res2 = mergeRecurs2(a1, a2);
         System.out.println("is sorted res1? "+isSorted(res2));
     }
 

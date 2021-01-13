@@ -2,9 +2,6 @@ package MaxMax;
 
 public class TestIf {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		long loop = 10000000;
 		int n=10;//1000;

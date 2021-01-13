@@ -1,20 +1,19 @@
 package MaxMax;
 
-import java.util.Arrays;
 import java.util.Stack;
 class Node{                               
 	int num;
-	Stack<Integer> st;
+	Stack<Integer> stack;
 	Node next, prev;
 	public Node(int num, Node n, Node p){
 		this.num = num;
-		st = new Stack<Integer>();
+		stack = new Stack<Integer>();
 		next = n;
 		prev = p;
 	}
 	public Node(int num){
 		this.num = num;
-		st = new Stack<Integer>();
+		stack = new Stack<Integer>();
 		next = null;
 		prev = null;
 	}
@@ -35,18 +34,18 @@ public class MaxMaxInduction {
 		n.next = head;
 		// Pair Process
 		int size = arr.length;
-		Node n1 = head, n2 = head.next;
+		Node n1 = head, n2;
 		while (size>1){
 			n2 = n1.next;
 			comparisons++;
 			if (n1.num<n2.num){
-				n2.st.push(n1.num);
+				n2.stack.push(n1.num);
 				n1.prev.next = n2;// remove n1
 				n2.prev = n1.prev;
 				n1 = n2.next;
 			}
 			else{
-				n1.st.push(n2.num);
+				n1.stack.push(n2.num);
 				n1.next = n2.next;// remove n2
 				n2.next.prev = n1;
 				n1 = n2.next;
@@ -55,11 +54,11 @@ public class MaxMaxInduction {
 		}
 		// last stack 
 		int max1 = n1.num;
-		int max2 = n1.st.pop();
+		int max2 = n1.stack.pop();
 		//System.out.println("comp = "+comparisons);
 		//System.out.println("n1.st.size = " + n1.st.size()); 
-		while(!n1.st.isEmpty()){
-			int number = n1.st.pop();
+		while(!n1.stack.isEmpty()){
+			int number = n1.stack.pop();
 			comparisons++;
 			if (max2<number) max2 = number;
 		}
