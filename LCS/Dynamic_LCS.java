@@ -26,7 +26,7 @@ public class Dynamic_LCS {
         int startI = X.length();
         int startJ = Y.length();
         subsequence = "";
-        Set<String> allSubSequences = new HashSet<String>();//there can be duplicated so Set is chosen
+        Set<String> allSubSequences = new HashSet<>();//there can be duplicated so Set is chosen
 
         //calculate all subsequences
         GetAllSubSequences(X, Y, Mat, startI, startJ, subsequence, allSubSequences);
@@ -35,16 +35,27 @@ public class Dynamic_LCS {
         System.out.println(allSubSequences);
     }
 
-
+    /**
+     *  	    a	b	c	d	e	f
+     * a  i,j=1	0	0	0	0	0	0
+     * b    0	0	0	0	0	0	0
+     * c    0	0	0	0	0	0	0
+     * d    0	0	0	0	0	0	0
+     * e    0	0	0	0	0	0	0
+     * f    0	0	0	0	0	0	0
+     */
     private static int[][] LCS(String x, String y) {
+        //define matrix size, everything set to zero
         int[][] Mat = new int[x.length()+1][y.length()+1];
+
         for (int i = 1; i <= x.length(); i++) {
             for (int j = 1; j <= y.length(); j++) {
                 if (x.charAt(i-1)==y.charAt(j-1))
                 {
+                    //add from the diagonal corner
                     Mat[i][j] = Mat[i-1][j-1]+1;
                 }
-                else
+                else//choose the max size from top or left size
                     Mat[i][j] = Math.max(Mat[i][j-1], Mat[i-1][j]);
             }
         }
