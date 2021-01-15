@@ -53,7 +53,6 @@ public class MaxMaxInduction {
 			size--;
 		}
 		// last stack 
-		int max1 = n1.num;
 		int max2 = n1.stack.pop();
 		//System.out.println("comp = "+comparisons);
 		//System.out.println("n1.st.size = " + n1.st.size()); 
