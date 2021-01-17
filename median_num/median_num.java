@@ -16,6 +16,18 @@ public class median_num {
     }
 
     /**
+     *     probabilty of being wrong after 64 check is 1/2^k (k is num of elements)
+     *     the more elements in the array, the less probability of being wrong
+     */
+    public static int median64(int[] arr) {
+        int max = arr[0];
+        for (int i = 1; i < 64; i++) { // ראשונים איברים 46 מתוך הגדול האיבר מציאת
+            if (arr[i] > max) max = arr[i];
+        }
+        return max;
+    }
+
+    /**
      * return one element in the array that bigger than median
      * Complexity: O(check)
      */
