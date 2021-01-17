@@ -4,9 +4,13 @@ import java.util.Vector;
 
 public class one_matrix {
     public static void main(String[] args) {
-
+int[][] mat = { {1,1,1,1},
+                {1,1,1,1},
+                {1,1,1,1},
+                {1,1,1,1}};
+        System.out.println(getBiggestSubMatrix(mat));
+        System.out.println(getAllMaxSubSquares(mat));
     }
-
 
     /**
      * returns the biggest square contains ones
@@ -17,12 +21,15 @@ public class one_matrix {
         int m = mat[0].length;
         int[][] help = new int[n][m];
         int max = 0, imax = 0, jmax = 0;
+        //fill the first row
         for (int i = 0; i < n; i++) {
             help[i][0] = mat[i][0];
         }
+        //fill the first line
         for (int i = 0; i < m; i++) {
             help[0][i] = mat[0][i];
         }
+
         for (int i = 1; i < n; i++) {
             for (int j = 1; j < m; j++) {
                 if (mat[i][j] == 1) {
@@ -42,8 +49,7 @@ public class one_matrix {
     private static int min(int i, int j, int k) {
         if (i <= j && i <= k) return i;
         if (j <= i && j <= k) return j;
-        if (k <= i && k <= j) return k;
-        else return -1;
+        return k;
     }
 
     /**
@@ -71,7 +77,7 @@ public class one_matrix {
                 }
             }
         }
-        Vector<String> allSquares = new Vector<String>();
+        Vector<String> allSquares = new Vector<>();
         if (max == 0) return allSquares;
         for (int i = 0; i < help.length; i++) {
             for (int j = 0; j < help[0].length; j++) {
