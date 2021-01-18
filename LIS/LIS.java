@@ -65,7 +65,6 @@ public class LIS {
     }
 
     private static int binarySearchBetween(int[][] mat, int curr_index, int element) {
-//        System.out.println("element: " + element + " lis: " + lis);
         //if this element is bigger than the last one then return the same index (lis)
         if (element > mat[curr_index - 1][curr_index - 1])
             return curr_index;
@@ -91,8 +90,7 @@ public class LIS {
 
         return -1;
     }
-
-
+//
     public static void printMatrix(int[][] mat) {
         for (int[] ints : mat) {
             for (int anInt : ints) {
