@@ -39,10 +39,13 @@ public class LIS {
             int index = binarySearchBetween(mat, len, arr[i]);
             mat[index][index] = arr[i];
             if (index == len) len++;
-            copy(mat, index);
+            //copies the line from above
+            for (int k = 0; k < index; k++) {
+                mat[index][k] = mat[index-1][k];
+            }
             printMatrix(mat);
         }
-
+        //create the answer from the last line of the matrix
         int[] ans = new int[len];
         for (int i = 0; i < ans.length; i++) {
             ans[i] = mat[len - 1][i];

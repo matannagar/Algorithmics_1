@@ -5,10 +5,10 @@ public class dynamic_numberGame {
     public static void main(String[] args) {
         dynamic_numberGame my_game = new dynamic_numberGame(new int[]{11, 3, 6, 11, 4, 2, 8, 10});
         System.out.println(my_game.getOptimalPathRec());
-        int sum = 11+3+6+11+4+2+8+10;
-        System.out.println("player b:" + (sum - my_game.getDifference())/2);
-        int b = (sum - my_game.getDifference())/2 + my_game.getDifference();
-        System.out.println("player a:" + b);
+//        int sum = 11+3+6+11+4+2+8+10;
+//        System.out.println("player b:" + (sum - my_game.getDifference())/2);
+//        int b = (sum - my_game.getDifference())/2 + my_game.getDifference();
+//        System.out.println("player a:" + b);
     }
 
     /**

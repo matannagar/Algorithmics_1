@@ -4,15 +4,20 @@ import java.util.Arrays;
 
 public class median_num {
     public static void main(String[] args) {
-        int[] arr1 = {10, 4, 13, 8, 3, 88, 5, 15, 22, 41, 1, 56, 32};
-        int[] arr2 = {78, 67, 103, 81, 33, 828, 51, 13, 20, 48, 1, 4, 99};
-        Arrays.sort(arr1);
-        System.out.println(Arrays.toString(arr1));
-        Arrays.sort(arr2);
-        System.out.println(Arrays.toString(arr2));
-
-//        System.out.println(MAX(arr1));
-        System.out.println(Arrays.toString(all_elements_greater_than_median(arr1, arr2)));
+//        int[] arr1 = {10, 4, 13, 8, 3, 88, 5, 15, 22, 41, 1, 56, 32};
+//        int[] arr2 = {78, 67, 103, 81, 33, 828, 51, 13, 20, 48, 1, 4, 99};
+//        Arrays.sort(arr1);
+//        System.out.println(Arrays.toString(arr1));
+//        Arrays.sort(arr2);
+//        System.out.println(Arrays.toString(arr2));
+//
+////        System.out.println(MAX(arr1));
+//        System.out.println(Arrays.toString(all_elements_greater_than_median(arr1, arr2)));
+        int[] a = {5,10,4,3,2,7,8};
+        System.out.println(simple_get_median(a));
+        int[] a1 = {5,8,10,32};
+        int[] a2 = {1,20,34,100};
+        System.out.println(Arrays.toString(all_elements_greater_than_median(a1, a2)));
     }
 
     /**
@@ -27,6 +32,11 @@ public class median_num {
         return max;
     }
 
+    public static int simple_get_median(int[] arr){
+        Arrays.sort(arr);
+        if (arr.length%2==0) return arr[arr.length/2]+arr[(arr.length-1)/2];
+        else return arr[arr.length/2];
+    }
     /**
      * return one element in the array that bigger than median
      * Complexity: O(check)
@@ -76,6 +86,10 @@ public class median_num {
         return max;
     }
 
+    /**
+     *takes two arrays and compare one from the beginning and one from the end
+     * adds the Max to an answer array
+     */
     public static int[] all_elements_greater_than_median(int[] a, int[] b) {
         int n = a.length;
         int[] c = new int[n];

@@ -13,9 +13,9 @@ public class power {
         double ans = 1;
         while (pow != 0) {
             if (pow % 2 == 1)
-                ans *= x; // multiply only when binary digit is 1
+                ans = ans * x; // multiply only when binary digit is 1
             x = x * x;
-            pow /= 2;
+            pow = pow / 2;
         }
         return ans;
     }
@@ -33,9 +33,11 @@ public class power {
     public static double powUsingBinary(double x, int n) {
         double ans = 1;
         while (n != 0) {
-            ans *= ((n & 1) != 0) ? x : 1;
+            if ((n & 1) != 0) {
+                ans *= x;
+            } else ans *= 1;
             x *= x;
-            n >>= 1;
+            n /= 2;
         }
         return ans;
     }
