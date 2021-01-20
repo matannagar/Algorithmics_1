@@ -1,7 +1,10 @@
 package LCS;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Dynamic_LCS {
 
@@ -27,11 +30,11 @@ public class Dynamic_LCS {
         int startI = X.length();
         int startJ = Y.length();
         subsequence = "";
-        Set<String> allSubSequences = new HashSet<>();//there can be duplicated so Set is chosen
+        ArrayList<String> allSubSequences = new ArrayList<>();//there can be duplicated so Set is chosen
 
         //calculate all subsequences
         GetAllSubSequences(X, Y, Mat, startI, startJ, subsequence, allSubSequences);
-
+        System.out.println(getAllSQ(X,Y));
         //print all subsequences
         System.out.println(allSubSequences);
     }
@@ -89,18 +92,31 @@ public class Dynamic_LCS {
         }
     }
 
-    private static void GetAllSubSequences(String x, String y, int[][] mat, int i, int j, String ans, Set<String> allSubSequences) {
-        while (i > 0 && j > 0) {
-            if (x.charAt(i - 1) == y.charAt(j - 1)) {
+    /**
+     *starts at the end of the matrix and goes back whenever he finds the next longestSequence
+     * if the chars are the same we will add the letter to the SS
+     * else we will move backward in the matrix to the biggest Integer until we find a match
+     * Requirment: ready Matrix, 2 Strings, empty array list, empty string"
+     */
+    public static ArrayList<String> getAllSQ(String X, String Y) {
+        ArrayList<String> allSubSequences = new ArrayList<>();
+        GetAllSubSequences(X, Y, LCS(X, Y), X.length(), Y.length(), "", allSubSequences);
+        List<String> newlist = allSubSequences.stream().distinct().collect(Collectors.toList());
+        return (ArrayList<String>) newlist;
+    }
+
+    private static void GetAllSubSequences(String x, String y, int[][] mat, int i, int j, String ans, ArrayList<String> allSubSequences) {
+        while (i > 0 && j > 0) { //both indexes start at the end of the matrix
+            if (x.charAt(i - 1) == y.charAt(j - 1)) { // if we find two characters that are the same
                 ans = x.charAt(i - 1) + ans;
-                i = i - 1;
+                i = i - 1; //move the element to the diagonal corner
                 j = j - 1;
             } else {
-                if (mat[i - 1][j] > mat[i][j - 1])
+                if (mat[i - 1][j] > mat[i][j - 1]) // now we are searching for the next biggest substring
                     i--;
                 else if (mat[i - 1][j] < mat[i][j - 1])
                     j--;
-                else {
+                else { // if they are both equal then we have two substring of the same size, split.
                     GetAllSubSequences(x, y, mat, i - 1, j, ans, allSubSequences);
                     GetAllSubSequences(x, y, mat, i, j - 1, ans, allSubSequences);
                     return;

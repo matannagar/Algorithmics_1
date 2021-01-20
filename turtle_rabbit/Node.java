@@ -1,11 +1,10 @@
 package turtle_rabbit;
 
-
 public class Node {
     int data;
-    Node prev, next =null;
+    Node prev, next = null;
 
-    public Node(){
+    public Node() {
 
     }
 

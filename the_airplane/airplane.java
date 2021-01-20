@@ -1,5 +1,8 @@
 package the_airplane;
 
+//import tests.airplane_x_to_y;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -23,7 +26,6 @@ public class airplane {
             numOfPaths = 1;
         }
     }
-
     public static class BestPath {
         int cheapestPrice, numOfPaths;
         private Node[][] mat;
@@ -42,12 +44,12 @@ public class airplane {
          */
         private void buildMatrix() {
             int column = mat.length, row = mat[0].length;
-            //set prices for first row
+            //set prices for first column
             for (int i = 1; i < column; i++) {
                 mat[i][0].price = mat[i - 1][0].y + mat[i - 1][0].price;
                 mat[i][0].numOfPaths = 1;
             }
-            //set prices for first column
+            //set prices for first row
             for (int j = 1; j < row; j++) {
                 mat[0][j].price = mat[0][j - 1].price + mat[0][j - 1].x;
                 mat[0][j].numOfPaths = 1;
@@ -186,12 +188,10 @@ public class airplane {
          */
         private int bestPathFromTo(int x1, int y1, int x2, int y2) {
             // Assuming p2>=p1 and q2>=q1
-            int row_length = y2-y1+1;
-            int columns_length = x2-x1+1;
+            int row_length = y2 - y1 + 1;
+            int columns_length = x2 - x1 + 1;
             //create temporary node matrix with distances from the points
             Node[][] temp = new Node[row_length][columns_length];
-//            System.out.println(row_length+"----->"+columns_length+"----->"+temp.length+"------>"+temp[0].length);
-            //creates new nodes for the temp matrix
             for (int i = 0; i < row_length; i++) {
                 for (int j = 0; j < columns_length; j++) {
                     temp[i][j] = new Node(0, 0);
@@ -203,17 +203,17 @@ public class airplane {
             }
             // set the prices for the first column
             for (int j = 1; j < columns_length; j++) {
-                temp[0][j].price = temp[0][j - 1].price + mat[y1][j - 1 + x1].x;
+                temp[0][j].price = mat[y1][j - 1 + x1].x + temp[0][j - 1].price;
             }
             // calculate the best price for each node along the way
-            for (int i = 1; i <row_length; i++) {
+            for (int i = 1; i < row_length; i++) {
                 for (int j = 1; j < columns_length; j++) {
                     int x = temp[i - 1][j].price + temp[i - 1 + y1][j + x1].y;
                     int y = temp[i][j - 1].price + temp[i + y1][j - 1 + x1].x;
                     temp[i][j].price = Math.min(x, y);
                 }
             }//return the bottom right node with the best price
-            return temp[row_length-1][columns_length-1].price;
+            return temp[row_length - 1][columns_length - 1].price;
         }
 
         /**
@@ -231,6 +231,7 @@ public class airplane {
             sum += bestPathFromTo(p[p.length - 1].x, p[p.length - 1].y, mat[0].length - 1, mat.length - 1);
             return sum == cheapestPrice;
         }
+
         private void sort(Node[] p) {
             @SuppressWarnings("unchecked")
             ArrayList<Node>[] freqy = new ArrayList[mat.length];
@@ -287,6 +288,7 @@ public class airplane {
             }
             return ans;
         }
+
         public void printPrices() {
             System.out.println("\nmatrix of prices in right direction\n");
             for (int i = 0; i < mat.length; i++) {
@@ -306,30 +308,32 @@ public class airplane {
                 System.out.println();
             }
         }
+
         public static void main(String[] args) {
             Node[][] mat = new Node[4][4];
             mat[0][0] = new Node(1, 2);
             mat[0][1] = new Node(1, 1);
             mat[0][2] = new Node(1, 3);
-            mat[0][3] = new Node(0, 1);
+            mat[0][3] = new Node(1, 1);
             mat[1][0] = new Node(2, 3);
             mat[1][1] = new Node(5, 1);
             mat[1][2] = new Node(6, 3);
-            mat[1][3] = new Node(0, 1);
+            mat[1][3] = new Node(1, 1);
             mat[2][0] = new Node(2, 4);
             mat[2][1] = new Node(7, 1);
             mat[2][2] = new Node(2, 3);
             mat[2][3] = new Node(0, 1);
-            mat[3][0] = new Node(2, 0);
-            mat[3][1] = new Node(1, 0);
-            mat[3][2] = new Node(1, 0);
-            mat[3][3] = new Node(0, 0);
+            mat[3][0] = new Node(2, 1);
+            mat[3][1] = new Node(1, 1);
+            mat[3][2] = new Node(1, 1);
+            mat[3][3] = new Node(1, 2);
             BestPath bp = new BestPath(mat);
+            System.out.println(bp.bestPathFromTo(0,0,3,3));;
 //            System.out.println(bp.cheapestPrice);
 //            System.out.println(bp.numOfPaths);
 //            System.out.println(bp.getOnePath());
 //            System.out.println(bp.getOnePathRec());
-            System.out.println(bp.getAllPathsRec());
+//            System.out.println(bp.getAllPathsRec());
 //            System.out.println(bp.isOnBestPath(1, 1));
 //            System.out.println(bp.isOnBestPath(1, 2));
 //            System.out.println(bp.isOnBestPath(new Node[]{new Node(1, 1), new Node(1, 2), new Node(1, 3)}));

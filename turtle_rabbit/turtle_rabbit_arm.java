@@ -2,7 +2,6 @@ package turtle_rabbit;
 
 import java.util.Arrays;
 
-
 public class turtle_rabbit_arm {
     public static void main(String[] args) {
         myLinkedList spear = new myLinkedList();
