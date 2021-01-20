@@ -16,8 +16,10 @@ public class compiler_problem {
         arr[2] = p3;
         arr[3] = p4;
         arr[4] = p5;
-
         getOptimalOrder(arr);
+
+        Arrays.sort(arr,(o1, o2) -> o1.freq/o1.len);
+        System.out.println(Arrays.toString(arr));
     }
 
     /**
