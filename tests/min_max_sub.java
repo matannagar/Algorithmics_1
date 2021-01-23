@@ -1,22 +1,24 @@
 package tests;
 
-public class min_max {
+/**
+ * returns the maximum difference in an array between two elements
+ * while i<j
+ */
+public class min_max_sub {
     public static void main(String[] args) {
-        int[] arr = {1,2,3,6,-2,100};
+        int[] arr = {1, 2, 3, 6, -2, 100};
         System.out.println(diff(arr));
     }
 
     // Function to calculate maximum difference between two elements in the
     // array such that smaller element appears before the larger element
-    public static int diff(int[] A)
-    {
+    public static int diff(int[] A) {
         int diff = Integer.MIN_VALUE;
         int n = A.length;
-        int max_so_far = A[n-1];
+        int max_so_far = A[n - 1];
 
         // traverse the array from right and keep track the maximum element
-        for (int i = n - 2; i >= 0; i--)
-        {
+        for (int i = n - 2; i >= 0; i--) {
             // update max if current element is greater than the max element
             if (A[i] > max_so_far) {
                 max_so_far = A[i];

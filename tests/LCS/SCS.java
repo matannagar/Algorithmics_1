@@ -1,9 +1,9 @@
-package tests;
+package tests.LCS;
 
 public class SCS {
     public static void main(String[] args) {
-        String X = "AGGTAB";
-        String Y = "GXTXAB";
+        String X = "abcbdab";
+        String Y = "bdcaba";
         //another example: x = abcabcaa, y = acbacba
         System.out.println(SCS_int(X, Y));
         //print the LCS
@@ -13,10 +13,15 @@ public class SCS {
         ;
     }
 
+    /**
+    returns length of longest common super sequence of both strings
+     */
     public static int SCS_int(String x, String y) {
         return x.length() + y.length() - LCS(x, y);
     }
-
+    /**
+     returns an example of SCS
+     */
     public static StringBuilder SCS(String x, String y) {
         String lcs = LCS_Sequence(x, y, LCS_mat(x, y));
         int i = 0, j = 0, k = 0;
@@ -32,11 +37,21 @@ public class SCS {
                 scc.append(y.charAt(j));
                 j++;
             }
-            System.out.println(k);
             if (k < lcs.length()) {
                 if (x.charAt(i) != lcs.charAt(k)) {
                     scc.append(x.charAt(i));
                     i++;
+                }
+                 if (k==lcs.length()-1){
+                    while (i<x.length()-1){
+                        scc.append(x.charAt(i));
+                        i++;
+                    }
+                    while (j<y.length()-1){
+                        scc.append(y.charAt(j));
+                        j++;
+
+                    }
                 }
             }
         }

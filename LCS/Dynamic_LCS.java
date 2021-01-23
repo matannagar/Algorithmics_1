@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 public class Dynamic_LCS {
 
     public static void main(String[] args) {
-        String X = "ZBGCRDE";
-        String Y = "YZGBCZD";
+//        String X = "ZBGCRDE";
+//        String Y = "YZGBCZD";
+        String X = "KMATANS";
+        String Y = "BEMATAAN";
         //another example: x = abcabcaa, y = acbacba
 
         //calculate matrix

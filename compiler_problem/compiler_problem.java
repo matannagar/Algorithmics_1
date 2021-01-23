@@ -1,14 +1,15 @@
 package compiler_problem;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class compiler_problem {
     public static void main(String[] args) {
         Program p1 = new Program("a1", 3, 12);
-        Program p2 = new Program("a2", 3, 3);
-        Program p3 = new Program("a3", 3, 4);
-        Program p4 = new Program("a4", 3, 3);
-        Program p5 = new Program("a5", 3, 6);
+        Program p2 = new Program("a2", 2, 3);
+        Program p3 = new Program("a3", 4, 4);
+        Program p4 = new Program("a4", 8, 3);
+        Program p5 = new Program("a5", 41, 6);
 
         Program[] arr = new Program[5];
         arr[0] = p1;
@@ -16,10 +17,12 @@ public class compiler_problem {
         arr[2] = p3;
         arr[3] = p4;
         arr[4] = p5;
+//        Arrays.sort(arr, Comparator.comparingDouble(o -> (o.freq / o.len)));
+        System.out.println(Arrays.toString(arr));
+
         getOptimalOrder(arr);
 
-        Arrays.sort(arr,(o1, o2) -> o1.freq/o1.len);
-        System.out.println(Arrays.toString(arr));
+//        System.out.println(Arrays.toString(arr));
     }
 
     /**
@@ -28,7 +31,7 @@ public class compiler_problem {
      */
     static class Program {
         String name;
-        int len, freq;
+        double len, freq;
 
         public Program(String name, int len, int freq) {
             this.name = name;
@@ -43,7 +46,7 @@ public class compiler_problem {
     }
 
     public static void getOptimalOrder(Program[] programs) {
-        sort_when_len_is_equal(programs, 0, programs.length);
+       mergeSort(programs, 0, programs.length);
         int totalTime = 0;
         int totalLen = 0;
         for (Program program : programs) {

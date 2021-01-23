@@ -1,8 +1,7 @@
-package the_airplane;
+package airplane;
 
 //import tests.airplane_x_to_y;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -25,7 +24,13 @@ public class airplane {
             entryFromTheEnd = 0;
             numOfPaths = 1;
         }
+
+        @Override
+        public String toString() {
+            return "" + price;
+        }
     }
+
     public static class BestPath {
         int cheapestPrice, numOfPaths;
         private Node[][] mat;
@@ -213,6 +218,7 @@ public class airplane {
                     temp[i][j].price = Math.min(x, y);
                 }
             }//return the bottom right node with the best price
+//            Print(temp);
             return temp[row_length - 1][columns_length - 1].price;
         }
 
@@ -309,6 +315,16 @@ public class airplane {
             }
         }
 
+        private static void Print(Node[][] mat) {
+            for (int i = 0; i < mat.length; i++) {
+                for (int j = 0; j < mat[i].length; j++) {
+                    System.out.print(mat[i][j].toString() + "\t");
+                }
+                System.out.println();
+            }
+        }
+
+
         public static void main(String[] args) {
             Node[][] mat = new Node[4][4];
             mat[0][0] = new Node(1, 2);
@@ -327,9 +343,11 @@ public class airplane {
             mat[3][1] = new Node(1, 1);
             mat[3][2] = new Node(1, 1);
             mat[3][3] = new Node(1, 2);
+
             BestPath bp = new BestPath(mat);
-            System.out.println(bp.bestPathFromTo(0,0,3,3));;
-//            System.out.println(bp.cheapestPrice);
+//            System.out.println(bp.bestPathFromTo(0,0,3,3));;
+            Print(bp.mat);
+            System.out.println(bp.cheapestPrice);
 //            System.out.println(bp.numOfPaths);
 //            System.out.println(bp.getOnePath());
 //            System.out.println(bp.getOnePathRec());

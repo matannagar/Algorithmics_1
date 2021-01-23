@@ -40,10 +40,10 @@ public class cycle_numbers_game {
 
     public static int cycle_num_game_mod(int[] arr) {
         int[] temp = new int[arr.length];
-        int  max = 0;
+        int max = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length; j++) {
-                temp[(i+j) % arr.length] = arr[j];
+                temp[(i + j) % arr.length] = arr[j];
                 if (numbers_game(temp) > max) {
                     max = numbers_game(temp);
                 }

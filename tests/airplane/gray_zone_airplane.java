@@ -1,4 +1,4 @@
-package tests;
+package tests.airplane;
 
 import java.awt.*;
 
@@ -17,23 +17,22 @@ public class gray_zone_airplane {
 
         @Override
         public String toString() {
-            return ""+ price ;
+            return "" + price;
         }
     }
 
     public static int grayZone(Node[][] mat, Point p1, Point p2) {
         Point src;
         Point dest;
-        if (p1.y>p2.y) {
+        if (p1.y > p2.y) {
             src = p2;
             dest = p1;
-        }
-        else {
+        } else {
             src = p1;
             dest = p2;
         }
-        int start_at_x = Math.min(src.x,dest.x);
-        int end_at_x = Math.max(src.x,dest.x);
+        int start_at_x = Math.min(src.x, dest.x);
+        int end_at_x = Math.max(src.x, dest.x);
         int column = mat.length, row = mat[0].length;
         //set prices for first column
         for (int i = 1; i < column; i++) {
@@ -47,9 +46,9 @@ public class gray_zone_airplane {
         }
 
 
-        for (int i =src.y ; i <= dest.y; i++) {
-            for (int j = start_at_x; j <=end_at_x ; j++) {
-                mat[i][j].price = Integer.MAX_VALUE-100;
+        for (int i = src.y; i <= dest.y; i++) {
+            for (int j = start_at_x; j <= end_at_x; j++) {
+                mat[i][j].price = Integer.MAX_VALUE - 100;
             }
         }
 
@@ -57,10 +56,9 @@ public class gray_zone_airplane {
         //set prices for the rest of the nodes
         for (int i = 1; i < column; i++) {
             for (int j = 1; j < row; j++) {
-                if (i<= dest.y && i>=src.y && j>=start_at_x && j<=end_at_x){
+                if (i <= dest.y && i >= src.y && j >= start_at_x && j <= end_at_x) {
                     mat[i][j].price = Integer.MAX_VALUE;
-                }
-                else{
+                } else {
 
                     int y = mat[i - 1][j].price + mat[i - 1][j].y;//calculates the value of node + y_price
                     int x = mat[i][j - 1].price + mat[i][j - 1].x;//calculates the value of node + x_price
@@ -76,8 +74,9 @@ public class gray_zone_airplane {
         int numOfPaths = mat[column - 1][row - 1].numOfPaths;
         int cheapestPrice = mat[column - 1][row - 1].price;
         Print(mat);
-        return mat[column-1][row-1].price;
+        return mat[column - 1][row - 1].price;
     }
+
     public static void main(String[] args) {
         System.out.println(grayZone(InitMat1(), new Point(2, 0), new Point(3, 2)));
     }
@@ -103,6 +102,7 @@ public class gray_zone_airplane {
         mat[3][3] = new Node(0, 0);
         return mat;
     }
+
     private static void Print(Node[][] mat) {
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[i].length; j++) {
